@@ -11,6 +11,14 @@ const WEBSOCKET_URL = 'wss://testnet.api.spin.fi/perp/v1/ws'
 const NEAR_NETWORK = 'testnet'
 
 const main = async () => {
+  if (ACCOUNT_ID === '<--ACCOUNT_ID-->' || ACCOUNT_ID === '') {
+    throw new Error('Please set account_id')
+  }
+
+  if (PRIVATE_KEY === '<--PRIVATE_KEY-->' || PRIVATE_KEY === '') {
+    throw new Error('Please set private_key')
+  }
+
   const api = await createPerpApi({
     accountId: ACCOUNT_ID,
     privateKey: PRIVATE_KEY,
