@@ -1,0 +1,28 @@
+{
+  "name": "spin-sdk-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "packageManager": "pnpm@7.26.1",
+  "scripts": {
+    "dev": "tsx watch src | pino-pretty --colorize",
+    "build": "tsc",
+    "start": "node ./build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@spinfi/core": "^2.1.0",
+    "@spinfi/node": "^2.1.0",
+    "bignumber.js": "^9.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "pino-pretty": "^9.1.1",
+    "prettier": "^2.8.3",
+    "tsx": "^3.12.2",
+    "typescript": "^4.9.4",
+    "websocket": "^1.0.34"
+  }
+}
