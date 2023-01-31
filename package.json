@@ -15,7 +15,8 @@
   "dependencies": {
     "@spinfi/core": "^2.1.0",
     "@spinfi/node": "^2.1.0",
-    "bignumber.js": "^9.1.1"
+    "bignumber.js": "^9.1.1",
+    "borsh": "^0.7.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

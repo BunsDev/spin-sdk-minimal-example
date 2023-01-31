@@ -5,6 +5,7 @@ specifiers:
   '@spinfi/node': ^2.1.0
   '@types/node': ^18.11.18
   bignumber.js: ^9.1.1
+  borsh: ^0.7.0
   pino-pretty: ^9.1.1
   prettier: ^2.8.3
   tsx: ^3.12.2
@@ -15,6 +16,7 @@ dependencies:
   '@spinfi/core': 2.1.0
   '@spinfi/node': 2.1.0
   bignumber.js: 9.1.1
+  borsh: 0.7.0
 
 devDependencies:
   '@types/node': 18.11.18
@@ -179,6 +181,14 @@ packages:
 
   /borsh/0.6.0:
     resolution: {integrity: sha512-sl5k89ViqsThXQpYa9XDtz1sBl3l1lI313cFUY1HKr+wvMILnb+58xpkqTNrYbelh99dY7K8usxoCusQmqix9Q==}
+    dependencies:
+      bn.js: 5.2.0
+      bs58: 4.0.1
+      text-encoding-utf-8: 1.0.2
+    dev: false
+
+  /borsh/0.7.0:
+    resolution: {integrity: sha512-CLCsZGIBCFnPtkNnieW/a8wmreDmfUtjU2m9yHrzPXIlNbqVs0AQrSatSG6vdNYUqdc83tkQi2eHfF98ubzQLA==}
     dependencies:
       bn.js: 5.2.0
       bs58: 4.0.1
