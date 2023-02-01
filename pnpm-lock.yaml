@@ -6,6 +6,7 @@ specifiers:
   '@types/node': ^18.11.18
   bignumber.js: ^9.1.1
   borsh: ^0.7.0
+  near-api-js: ^1.1.0
   pino-pretty: ^9.1.1
   prettier: ^2.8.3
   tsx: ^3.12.2
@@ -16,6 +17,7 @@ dependencies:
   '@spinfi/core': 2.1.0
   '@spinfi/node': 2.1.0
   bignumber.js: 9.1.1
+  near-api-js: 1.1.0
 
 devDependencies:
   '@types/node': 18.11.18
@@ -177,6 +179,10 @@ packages:
   /bn.js/5.2.0:
     resolution: {integrity: sha512-D7iWRBvnZE8ecXiLj/9wbxH7Tk79fAh8IHaTNq1RWRixsS02W+5qS+iE9yq6RYl0asXx5tw0bLhmT5pIfbSquw==}
 
+  /bn.js/5.2.1:
+    resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==}
+    dev: false
+
   /borsh/0.6.0:
     resolution: {integrity: sha512-sl5k89ViqsThXQpYa9XDtz1sBl3l1lI313cFUY1HKr+wvMILnb+58xpkqTNrYbelh99dY7K8usxoCusQmqix9Q==}
     dependencies:
@@ -191,7 +197,6 @@ packages:
       bn.js: 5.2.0
       bs58: 4.0.1
       text-encoding-utf-8: 1.0.2
-    dev: true
 
   /brace-expansion/2.0.1:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
@@ -653,6 +658,24 @@ packages:
     dependencies:
       bn.js: 5.2.0
       borsh: 0.6.0
+      bs58: 4.0.1
+      depd: 2.0.0
+      error-polyfill: 0.1.3
+      http-errors: 1.8.1
+      js-sha256: 0.9.0
+      mustache: 4.2.0
+      node-fetch: 2.6.8
+      text-encoding-utf-8: 1.0.2
+      tweetnacl: 1.0.3
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /near-api-js/1.1.0:
+    resolution: {integrity: sha512-qYKv1mYsaDZc2uYndhS+ttDhR9+60qFc+ZjD6lWsAxr3ZskMjRwPffDGQZYhC7BRDQMe1HEbk6d5mf+TVm0Lqg==}
+    dependencies:
+      bn.js: 5.2.1
+      borsh: 0.7.0
       bs58: 4.0.1
       depd: 2.0.0
       error-polyfill: 0.1.3

@@ -1,6 +1,7 @@
 import { GetOrderbookResponse } from '@spinfi/core/build/types/spot'
 import { createPerpApi } from '@spinfi/node'
 import { convertDecimalStringToNumber, convertNumberToDecimalString } from 'utils.js'
+import { getTransactionLastResult, FinalExecutionOutcome } from 'near-api-js/lib/providers'
 
 const ACCOUNT_ID = '<--ACCOUNT_ID-->'
 const PRIVATE_KEY = '<--PRIVATE_KEY-->'
@@ -11,14 +12,6 @@ const WEBSOCKET_URL = 'wss://testnet.api.spin.fi/perp/v1/ws'
 const NEAR_NETWORK = 'testnet'
 
 const main = async () => {
-  if (ACCOUNT_ID === '<--ACCOUNT_ID-->' || ACCOUNT_ID === '') {
-    throw new Error('Please set account_id')
-  }
-
-  if (PRIVATE_KEY === '<--PRIVATE_KEY-->' || PRIVATE_KEY === '') {
-    throw new Error('Please set private_key')
-  }
-
   const api = await createPerpApi({
     accountId: ACCOUNT_ID,
     privateKey: PRIVATE_KEY,
@@ -110,7 +103,7 @@ const main = async () => {
   // Canceling first order if exist
   // https://docs.api.spin.fi/perp/#cancel_order
   if (orders.length > 0) {
-    console.log(`CANCELING ${ACCOUNT_ID} ID:${orders[0].id} ORDER:`)
+    console.log(`CANCELING ${ACCOUNT_ID} ID:${orders[0].id}`)
     await api.spin.cancelOrder({
       marketId: market.id,
       orderId: orders[0].id,
@@ -124,16 +117,18 @@ const main = async () => {
   // https://docs.api.spin.fi/perp/#place_ask
   console.log('PLACING ORDER')
   console.log('ASK 10 NEAR-PERP CONTRACTS @ 1 USDC')
-  await api.spin.placeAsk({
+  const outcome = (await api.spin.placeAsk({
     marketId: market.id,
-    // @ts-ignore
-    price: convertNumberToDecimalString(1),
-    // @ts-ignore
-    quantity: convertNumberToDecimalString(10),
+    price: BigInt(convertNumberToDecimalString(1)),
+    quantity: BigInt(convertNumberToDecimalString(10)),
     marketOrder: false,
-    clientOrderId: 999,
+    clientOrderId: 1000,
     postOnly: true,
-  })
+  })) as FinalExecutionOutcome
+
+  const order_id = getTransactionLastResult(outcome)
+
+  console.log('ORDER ID:', order_id)
   console.log('———————————————')
   console.log('')
   console.log('')
