@@ -166,12 +166,18 @@ const main = async () => {
     equity: 0,
     upnl: 0,
   }
+  // First we get account balance and USDC token information.
   const balances_raw = await api.spin.getBalances({ accountId: ACCOUNT_ID })
   const baseCurrency_raw = await api.spin.getBaseCurrency()
+  // Get account positions with all info.
   const accountPositions = await api.spin.getPositions({ accountId: ACCOUNT_ID })
+  // Convert to human readeble numbers
   account_summary.balance_usdc = convertDecimalStringToNumber(balances_raw, baseCurrency_raw.decimals)
+  // get_positions method return margin_ratio
   account_summary.margin_ratio = +accountPositions.margin_ratio
+  // Loop through the positions to get their upnl
   account_summary.upnl = accountPositions.positions.reduce((total, current) => total + convertDecimalStringToNumber(current.upnl), 0)
+  // Calculate equity
   account_summary.equity = account_summary.balance_usdc + account_summary.upnl
   console.log('ACCOUNT SUMMARY:')
   console.dir(account_summary)
