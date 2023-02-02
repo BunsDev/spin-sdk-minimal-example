@@ -8,7 +8,6 @@ const PRIVATE_KEY = '<--PRIVATE_KEY-->'
 // https://docs.api.spin.fi/perp/#perp-contract-api
 const CONTRACT_ID = 'v2_0_2.perp.spin-fi.testnet'
 const WEBSOCKET_URL = 'wss://testnet.api.spin.fi/perp/v1/ws'
-
 const NEAR_NETWORK = 'testnet'
 
 const main = async () => {
@@ -50,7 +49,7 @@ const main = async () => {
   // Custom function example
   // Example getting order book
   // https://docs.api.spin.fi/perp/#get_orderbook
-  const orderbook_level_one: GetOrderbookResponse = await api.near.view('v2_0_2.perp.spin-fi.testnet', 'get_orderbook', { market_id: market.id, limit: 1 })
+  const orderbook_level_one: GetOrderbookResponse = await api.near.view(CONTRACT_ID, 'get_orderbook', { market_id: market.id, limit: 1 })
 
   console.log(`${market.symbol} ORDER BOOK L1:`)
   console.dir(orderbook_level_one)
@@ -156,6 +155,26 @@ const main = async () => {
       },
     },
   )
+  console.log('———————————————')
+  console.log('')
+  console.log('')
+
+  // Example getting balance, equity, margin_ratio
+  const account_summary = {
+    balance_usdc: 0,
+    margin_ratio: 0,
+    equity: 0,
+    upnl: 0,
+  }
+  const balances_raw = await api.spin.getBalances({ accountId: ACCOUNT_ID })
+  const baseCurrency_raw = await api.spin.getBaseCurrency()
+  const accountPositions = await api.spin.getPositions({ accountId: ACCOUNT_ID })
+  account_summary.balance_usdc = convertDecimalStringToNumber(balances_raw, baseCurrency_raw.decimals)
+  account_summary.margin_ratio = +accountPositions.margin_ratio
+  account_summary.upnl = accountPositions.positions.reduce((total, current) => total + convertDecimalStringToNumber(current.upnl), 0)
+  account_summary.equity = account_summary.balance_usdc + account_summary.upnl
+  console.log('ACCOUNT SUMMARY:')
+  console.dir(account_summary)
   console.log('———————————————')
   console.log('')
   console.log('')
